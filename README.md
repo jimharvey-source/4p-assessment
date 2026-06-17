@@ -70,19 +70,20 @@ Following the OSCI Pro pattern:
 
 ---
 
-## Phase 1 — Free assessment (this commit and the next)
+## Phase 1 — Free assessment (commit 2)
 
 - [x] Repo scaffold, Tailwind config, fonts, base styles
 - [x] Landing page with brand identity (charcoal/black diagnostic)
 - [x] App router with placeholder routes for the multi-step flow
-- [ ] Context questions (C1–C4) — single screen, all four
-- [ ] Diagnostic items — one P per screen, 9 items, grouped by element
-- [ ] Email capture before report generation
-- [ ] Scoring engine — element / driver / P aggregation, priority P logic
-- [ ] Free report renderer — 4 inline pages (Cover / Dashboard / Priority P / One Move)
-- [ ] Supabase integration — response storage with magic-link auth
-- [ ] Mailchimp integration — add to Management Ignite list with tag `4p-diagnostic-free`
-- [ ] Stripe placeholder for Pro report (button only, link active in Phase 2)
+- [x] Question bank — 40 items, scale, P/element/driver structure
+- [x] Scoring engine — element/driver/P aggregation, priority P logic (verified against spec worked example)
+- [x] Context questions (C1–C4) — single screen, all four
+- [x] Diagnostic items — one P per screen, 9 items, grouped by element, 5-point Likert
+- [x] Email capture before report generation
+- [x] Free report renderer — 4 inline pages (Cover / Dashboard / Priority P / One Move)
+- [x] Supabase integration — response storage via serverless function with service_role key
+- [x] Mailchimp integration — sync to Management Ignite list with tag `4p-diagnostic-free`
+- [x] Stripe placeholder for Pro report (button disabled, "coming soon")
 
 ## Phase 2 — Pro report (separate release)
 
