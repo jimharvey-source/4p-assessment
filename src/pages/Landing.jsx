@@ -212,9 +212,9 @@ function ToolLink({ dot, tool, url }) {
 
 function Levels() {
   const points = [
-    { icon: 'up', title: 'The foundation governs everything above it.', text: 'Each level sets the limits for the ones above. Plan can be no clearer than Purpose, and People can be no stronger than the Plan they work to.' },
-    { icon: 'down', title: 'Higher levels can only influence the ones below.', text: 'A proud team tightens its own standards and process. It cannot fix a purpose nobody has set.' },
-    { icon: 'look', title: 'Symptoms show at the peak. Causes sit in the foundation.', text: 'A team with no energy looks like a Pride problem. The cause usually sits further down: an unclear standard, unclear authority, or no agreed purpose at all. So start with the lowest layer that is not holding.' },
+    { icon: 'up', title: 'The foundation governs everything above it.', text: 'Each level sets the limits for the ones above. A Plan can’t succeed if the Purpose is vague, and People can be no stronger than the Plan they work to.' },
+    { icon: 'down', title: 'Higher levels can only influence the ones below.', text: 'A proud team tightens its own standards and process. It cannot fix a purpose nobody has explained to them.' },
+    { icon: 'look', title: 'Symptoms of lower level failure show at the peak. Causes wait silently in the foundations.', text: 'A team lacking motivation looks like a Pride problem. The cause usually sits further down: no clear standards, conflicting ownership, or conflicting goals. Lasting change starts with fixing the layer that is broken.' },
   ];
   return (
     <figure className="lv" aria-label="The 4Ps as a pyramid: Purpose at the foundation, then Plan, People, and Pride at the peak.">
