@@ -12,7 +12,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { PS } from '../../src/lib/questionBank.js';
 import { scoreToBand } from '../../src/lib/scoringEngine.js';
-import { P_NARRATIVES, DRIVER_MOVES, TOOL_FOR_P } from '../../src/lib/reportContent.js';
+import { P_NARRATIVES, P_SUMMARIES, DRIVER_MOVES, TOOL_FOR_P } from '../../src/lib/reportContent.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -155,22 +155,34 @@ function dashboard(doc, scores) {
     const score = scores.pScores[p.key];
     const band = scoreToBand(score);
     const isPriority = scores.priority_p === p.key;
+    const summary = P_SUMMARIES[p.key];
     const pad = 16;
-    const h = 86;
+    const inner = WIDTH - pad * 2;
+    doc.font(F.sans).fontSize(9.5);
+    const sumH = summary ? doc.heightOfString(summary.text, { width: inner - 60, lineGap: 2 }) : 0;
+    const h = 86 + (sumH ? sumH + 8 : 0);
     const y0 = doc.y;
     doc.roundedRect(LEFT, y0, WIDTH, h, 10).lineWidth(isPriority ? 1.4 : 0.8).strokeColor(isPriority ? INK : RULE).stroke();
     dot(doc, LEFT + pad + 3.5, y0 + pad + 9, p.colour);
     doc.font(F.bold).fontSize(15).fillColor(INK).text(p.name, LEFT + pad + 14, y0 + pad, { lineBreak: false });
-    if (isPriority) {
-      const nameW = doc.widthOfString(p.name);
-      doc.font(F.bold).fontSize(9).fillColor(ACCENT).text('Priority', LEFT + pad + 14 + nameW + 10, y0 + pad + 5, { lineBreak: false });
-    }
+    let tx = LEFT + pad + 14 + doc.widthOfString(p.name) + 10;
+    [summary?.tag && { t: summary.tag, c: MUTED }, isPriority && { t: 'Priority', c: ACCENT }].filter(Boolean).forEach(({ t, c }) => {
+      doc.font(F.bold).fontSize(9).fillColor(c).text(t, tx, y0 + pad + 5, { lineBreak: false });
+      tx += doc.widthOfString(t) + 10;
+    });
     doc.font(F.bold).fontSize(22).fillColor(INK).text(String(score), LEFT, y0 + pad - 4, { width: WIDTH - pad, align: 'right', lineBreak: false });
-    const barY = y0 + pad + 30;
-    doc.roundedRect(LEFT + pad, barY, WIDTH - pad * 2, 6, 3).fillColor(SUNK).fill();
-    doc.roundedRect(LEFT + pad, barY, Math.max(6, (WIDTH - pad * 2) * score / 100), 6, 3).fillColor(isPriority ? ACCENT : INK).fill();
+    let cy = y0 + pad + 26;
+    if (summary) {
+      doc.font(F.sans).fontSize(9.5).fillColor(INK_2).text(summary.text, LEFT + pad, cy, { width: inner - 60, lineGap: 2 });
+      cy += sumH + 10;
+    } else {
+      cy += 4;
+    }
+    const barY = cy;
+    doc.roundedRect(LEFT + pad, barY, inner, 6, 3).fillColor(SUNK).fill();
+    doc.roundedRect(LEFT + pad, barY, Math.max(6, inner * score / 100), 6, 3).fillColor(isPriority ? ACCENT : INK).fill();
     doc.font(F.sans).fontSize(9.5).fillColor(INK_2).text(band, LEFT + pad, barY + 16, { lineBreak: false });
-    doc.font(F.sans).fontSize(9).fillColor(MUTED).text(p.elements.map(el => el.name).join(' · '), LEFT, barY + 16, { width: WIDTH - pad, align: 'right', lineBreak: false });
+    doc.font(F.sans).fontSize(9).fillColor(MUTED).text(p.elements.map(el => el.name).join(' \u00B7 '), LEFT, barY + 16, { width: WIDTH - pad, align: 'right', lineBreak: false });
     doc.y = y0 + h + 10;
   });
 

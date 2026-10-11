@@ -52,6 +52,14 @@ export const P_NARRATIVES = {
   },
 };
 
+// What each P measures and why it matters. One line each, on the scores page.
+export const P_SUMMARIES = {
+  purpose: { tag: 'Foundation', text: 'Whether your team knows where it is heading and why. It is the foundation: every other P rests on it.' },
+  plan:    { tag: null,         text: 'Whether the work is set up to deliver: clear process, clear roles, clear authority. It turns direction into results.' },
+  people:  { tag: null,         text: 'Whether the team holds to its standards, trusts each other and gives honest feedback. It keeps the plan working under pressure.' },
+  pride:   { tag: 'Peak',       text: 'Whether people care about the work and it shows. It rests on the other three, so problems lower down show up here first.' },
+};
+
 // One "one move this week" per driver.
 // This is the single highest-leverage development move drawn from the
 // framework's development moves for the corresponding element.

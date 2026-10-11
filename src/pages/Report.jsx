@@ -13,7 +13,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDiagnostic } from '../lib/diagnosticState';
 import { PS } from '../lib/questionBank';
 import { scoreToBand } from '../lib/scoringEngine';
-import { P_NARRATIVES, DRIVER_MOVES, TOOL_FOR_P } from '../lib/reportContent';
+import { P_NARRATIVES, P_SUMMARIES, DRIVER_MOVES, TOOL_FOR_P } from '../lib/reportContent';
 import Footer from '../components/Footer';
 
 function longDate(d) {
@@ -233,37 +233,29 @@ function DashboardPage({ scores }) {
 
 function PBar({ p, score, band, isPriority }) {
   const pct = Math.max(2, score);
+  const summary = P_SUMMARIES[p.key];
   return (
-    <div className={`p-5 border ${isPriority ? 'border-ink-900' : 'border-ink-200'}`}>
-      <div className="flex items-baseline justify-between mb-3">
-        <div className="flex items-baseline gap-3">
-          <div
-            className="font-sans text-xs font-bold text-white px-2 py-1 tracking-wider"
-            style={{ backgroundColor: p.colour }}
-          >
-            {p.code}
-          </div>
-          <h3 className="font-serif text-2xl font-semibold text-ink-900">{p.name}</h3>
-          {isPriority && (
-            <span className="font-sans text-xs text-ink-900 font-bold">
-              · Priority
-            </span>
-          )}
+    <div className={`p-5 rounded-[12px] border ${isPriority ? 'border-ink-900 border-[1.5px]' : 'border-ink-200'}`}>
+      <div className="flex items-start justify-between gap-4 mb-2">
+        <div className="flex items-center flex-wrap gap-x-3 gap-y-1">
+          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.colour }} />
+          <h3 className="text-xl font-semibold text-ink-900">{p.name}</h3>
+          {summary?.tag && <span className="text-xs font-semibold text-ink-500">{summary.tag}</span>}
+          {isPriority && <span className="text-xs font-semibold text-accent">Priority</span>}
         </div>
-        <div className="text-right">
-          <div className="font-serif text-3xl font-semibold text-ink-900">{score}</div>
-        </div>
+        <div className="text-3xl font-semibold text-ink-900 leading-none">{score}</div>
       </div>
-      <div className="w-full h-2 bg-ink-100 mb-2">
+      {summary && <p className="text-[15px] leading-relaxed text-ink-700 mb-4 max-w-prose">{summary.text}</p>}
+      <div className="w-full h-1.5 rounded-full bg-ink-100 mb-2">
         <div
-          className="h-2 transition-all duration-700"
-          style={{ width: `${pct}%`, backgroundColor: p.colour }}
+          className="h-1.5 rounded-full transition-all duration-700"
+          style={{ width: `${pct}%`, backgroundColor: isPriority ? '#0e7c7b' : '#1b2a4a' }}
         />
       </div>
-      <div className="flex items-center justify-between">
-        <span className="font-sans italic text-sm text-ink-500">{band}</span>
-        <span className="font-sans text-xs text-ink-400 italic">
-          {p.elements.map(el => el.name).join(' · ')}
+      <div className="flex items-center justify-between gap-4">
+        <span className="text-sm text-ink-700">{band}</span>
+        <span className="text-xs text-ink-500 text-right">
+          {p.elements.map(el => el.name).join(' \u00B7 ')}
         </span>
       </div>
     </div>
