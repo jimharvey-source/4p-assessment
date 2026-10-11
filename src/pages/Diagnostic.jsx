@@ -47,10 +47,10 @@ export default function Diagnostic() {
       <header className="border-b border-ink-200 sticky top-0 bg-white z-10">
         <div className="container-reading py-4">
           <div className="flex items-center justify-between mb-3">
-            <Link to="/" className="font-sans text-xs tracking-widest text-ink-500 hover:text-ink-900 uppercase">
+            <Link to="/" className="font-sans text-xs text-ink-500 hover:text-ink-900">
               ← Back to start
             </Link>
-            <div className="font-sans text-xs tracking-widest text-ink-500 uppercase">
+            <div className="font-sans text-xs text-ink-500">
               {step === 0 ? 'Context' : `${PS[step - 1].name} · Step ${step} of 4`}
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function Diagnostic() {
           <button
             onClick={handleBack}
             disabled={step === 0}
-            className="font-sans text-sm text-ink-500 hover:text-ink-900 disabled:opacity-30 disabled:cursor-not-allowed transition-colors uppercase tracking-wider"
+            className="font-sans text-sm text-ink-500 hover:text-ink-900 disabled:opacity-30 disabled:cursor-not-allowed transition-colors tracking-wider"
           >
             ← Previous
           </button>
@@ -96,7 +96,7 @@ export default function Diagnostic() {
 function ContextStep({ context, setContext }) {
   return (
     <div>
-      <div className="eyebrow mb-6">PART ONE OF TWO · CONTEXT</div>
+      <div className="eyebrow mb-6">Part one of two: context</div>
       <h1 className="font-serif font-semibold text-4xl sm:text-5xl text-ink-900 leading-tight mb-6">
         First, a little context.
       </h1>
@@ -121,7 +121,7 @@ function ContextStep({ context, setContext }) {
 function ContextQuestion({ q, value, onChange }) {
   return (
     <div>
-      <div className="font-sans text-xs tracking-widest text-ink-400 mb-2 uppercase">{q.code}</div>
+      <div className="font-sans text-xs text-ink-400 mb-2">{q.code}</div>
       <h2 className="font-serif text-2xl font-semibold text-ink-900 mb-6 leading-tight">
         {q.question}
       </h2>
@@ -195,7 +195,7 @@ function ItemRow({ item, value, onChange }) {
   return (
     <div className="bg-ink-50 p-5 sm:p-6 border border-ink-200">
       <div className="flex items-baseline gap-3 mb-4">
-        <span className="font-sans text-xs text-ink-400 tracking-widest font-semibold whitespace-nowrap">
+        <span className="font-sans text-xs text-ink-400 font-semibold whitespace-nowrap">
           {item.code}
         </span>
         <p className="font-serif text-base sm:text-lg text-ink-700 leading-relaxed">

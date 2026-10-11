@@ -67,17 +67,17 @@ export default function Email() {
     <div className="min-h-screen bg-white text-ink-700">
       <header className="border-b border-ink-200">
         <div className="container-reading py-4 flex items-center justify-between">
-          <Link to="/diagnostic" className="font-sans text-xs tracking-widest text-ink-500 hover:text-ink-900 uppercase">
+          <Link to="/diagnostic" className="font-sans text-xs text-ink-500 hover:text-ink-900">
             ← Back to diagnostic
           </Link>
-          <div className="font-sans text-xs tracking-widest text-ink-500 uppercase">
+          <div className="font-sans text-xs text-ink-500">
             Almost done
           </div>
         </div>
       </header>
 
       <main className="container-reading py-20 sm:py-28">
-        <div className="eyebrow mb-6">YOUR REPORT IS READY</div>
+        <div className="eyebrow mb-6">Your report is ready</div>
         <h1 className="font-serif font-semibold text-4xl sm:text-5xl text-ink-900 leading-tight mb-6">
           Where shall we send it?
         </h1>
@@ -87,7 +87,7 @@ export default function Email() {
 
         <div className="max-w-prose space-y-8">
           <div>
-            <label htmlFor="first_name" className="block font-sans text-xs uppercase tracking-widest text-ink-500 mb-3">
+            <label htmlFor="first_name" className="block font-sans text-xs text-ink-500 mb-3">
               First name
             </label>
             <input
@@ -102,7 +102,7 @@ export default function Email() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block font-sans text-xs uppercase tracking-widest text-ink-500 mb-3">
+            <label htmlFor="email" className="block font-sans text-xs text-ink-500 mb-3">
               Email
             </label>
             <input

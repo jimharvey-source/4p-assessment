@@ -9,14 +9,13 @@
     text-rendering: optimizeLegibility;
   }
   body {
-    @apply font-serif text-ink-700 bg-white;
-    font-feature-settings: "ss01", "ss02";
+    @apply font-sans text-ink-700 bg-white;
   }
   h1, h2, h3, h4 {
-    @apply font-serif text-ink-900;
+    @apply font-sans text-ink-900 font-semibold tracking-tight;
   }
   ::selection {
-    background-color: #1A1A1A;
+    background-color: #1b2a4a;
     color: #FFFFFF;
   }
 }
@@ -29,12 +28,12 @@
     @apply mx-auto max-w-prose px-6 sm:px-8;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 font-sans font-medium text-white bg-ink-900 hover:bg-ink-800 transition-colors duration-150 rounded-none tracking-wide;
+    @apply inline-flex items-center justify-center min-h-[48px] px-6 font-sans font-semibold text-white bg-ink-900 hover:opacity-90 transition-opacity duration-150 rounded-[10px];
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 font-sans font-medium text-ink-900 bg-transparent border border-ink-900 hover:bg-ink-100 transition-colors duration-150 rounded-none tracking-wide;
+    @apply inline-flex items-center justify-center min-h-[48px] px-6 font-sans font-semibold text-ink-900 bg-white border border-ink-200 hover:border-ink-900 transition-colors duration-150 rounded-[10px];
   }
   .eyebrow {
-    @apply font-sans uppercase text-xs tracking-widest text-ink-500 font-semibold;
+    @apply font-sans text-[13px] tracking-[0.01em] text-ink-500 font-semibold;
   }
 }

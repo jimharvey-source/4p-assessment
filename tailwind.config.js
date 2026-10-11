@@ -7,28 +7,35 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Fraunces', 'Georgia', 'serif'],
-        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        // Management Ignition design system, 11 October 2026. Instrument Sans for everything the
+        // software says. "serif" points at it too, so older classes follow without edits.
+        // Fraunces only where Jim speaks to the reader: font-spoken.
+        sans: ['"Instrument Sans"', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif'],
+        serif: ['"Instrument Sans"', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif'],
+        spoken: ['Fraunces', '"Iowan Old Style"', 'Georgia', 'serif'],
       },
       colors: {
-        // Diagnostic identity — sober, charcoal, premium
+        // The design system's roles, under the old names so every page follows.
         ink: {
-          900: '#0F0F10',
-          800: '#1A1A1A',
-          700: '#222222',
-          600: '#3A3A3A',
-          500: '#666666',
-          400: '#888888',
-          300: '#CCCCCC',
-          200: '#E5E5E2',
-          100: '#F5F1EA',
-          50:  '#FAFAF7',
+          900: '#1b2a4a',
+          800: '#1b2a4a',
+          700: '#2a3d63',
+          600: '#2a3d63',
+          500: '#5d6b7f',
+          400: '#7a8798',
+          300: '#c9d1dc',
+          200: '#e2e7ee',
+          100: '#eef2f6',
+          50:  '#f6f8fb',
         },
-        // The four Ps — borrowed from the framework / Ignite suite
+        accent: '#0e7c7b',
+        'accent-soft': '#e9f3f3',
+        // Tool colours: dots only, never text or fills.
         purpose: '#4CAF50',
         plan:    '#0077B6',
         people:  '#8B00CC',
         pride:   '#FF9800',
+        meeting: '#F44336',
       },
       maxWidth: {
         prose: '40rem',

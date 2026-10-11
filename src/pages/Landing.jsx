@@ -1,164 +1,184 @@
 import { Link } from 'react-router-dom';
 
+// The 4Ps diagnostic landing page, 11 October 2026.
+// Same wording and order as management-ignition.com: the four elements stack from Purpose,
+// the foundation, to Pride, the peak. Tool colours appear as dots only.
+
+const SITE = 'https://management-ignition.com';
+
+const PS = [
+  {
+    n: 1, name: 'Purpose', tag: 'Foundation', dot: 'bg-purpose',
+    question: 'Where are we headed, and why does it matter?',
+    elements: 'Vision, Goals, Measures',
+    work: 'Setting clear goals', tool: 'Goal Ignite', url: 'https://goal.management-ignition.com',
+  },
+  {
+    n: 2, name: 'Plan', dot: 'bg-plan',
+    question: 'How are we going to get there?',
+    elements: 'Process, Roles, Authority',
+    work: 'Delegating effectively', tool: 'Delegate Ignite', url: 'https://delegate.management-ignition.com',
+  },
+  {
+    n: 3, name: 'People', dot: 'bg-people',
+    question: 'How do we hold ourselves to the right standards?',
+    elements: 'Standards, Trust, Feedback',
+    work: 'Feedback, with coaching to build confidence', tool: 'Feedback Ignite', url: 'https://feedback.management-ignition.com',
+  },
+  {
+    n: 4, name: 'Pride', tag: 'Peak', dot: 'bg-pride',
+    question: 'Do we actually care? How does it show?',
+    elements: 'Proactivity, Energy, Recognition',
+    work: 'Coaching', tool: 'Coach Ignite', url: 'https://coach.management-ignition.com',
+  },
+];
+
+const GETS = [
+  { title: 'Your four scores', text: 'Purpose, Plan, People and Pride, each with a plain label, so you can see at a glance where the team is strong and where the gaps are.' },
+  { title: 'The first P to fix', text: 'The lowest layer that is not holding. Everything above it rests on it, so that is where the work starts.' },
+  { title: 'One move this week', text: 'A concrete action for the weakest part of that P, written to fit the meetings and conversations you already have.' },
+  { title: 'The tool to start it in', text: 'A link to the Management Ignition tool that does that work with you. Three free uses, no card.' },
+];
+
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-white text-ink-700">
-      {/* Header bar */}
-      <header className="border-b border-ink-200">
-        <div className="container-reading py-5 flex items-center justify-between">
-          <div className="font-sans text-sm tracking-wide text-ink-500">
-            JIM HARVEY &nbsp;·&nbsp; THE MESSAGE BUSINESS
-          </div>
-          <a
-            href="https://management-ignition.com"
-            className="font-sans text-xs uppercase tracking-widest text-ink-500 hover:text-ink-900 transition-colors"
-          >
-            Management Ignition ↗
+    <div className="min-h-screen bg-ink-50 text-ink-700">
+      <header className="border-b border-ink-200 bg-ink-50">
+        <div className="container-reading py-4 flex items-center justify-between gap-4">
+          <a href={SITE} aria-label="Management Ignition home">
+            <img src="/mi-lockup.svg" alt="Jim Harvey's Management Ignition" className="h-8 sm:h-9 w-auto block" />
+          </a>
+          <a href={SITE} className="hidden sm:inline font-sans text-sm font-medium text-ink-700 hover:text-ink-900 underline decoration-ink-200 underline-offset-4">
+            management-ignition.com
           </a>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="container-reading pt-20 sm:pt-28 pb-16">
-        <div className="eyebrow mb-6">A DIAGNOSTIC FOR TEAM LEADERS</div>
-
-        <h1 className="font-serif font-semibold text-5xl sm:text-7xl leading-[1.05] text-ink-900 tracking-tight mb-6">
-          The 4Ps of<br/>Leadership
-        </h1>
-
-        <p className="font-serif italic text-xl sm:text-2xl text-ink-500 mb-12 leading-snug">
-          The spark to ignite your team.
-        </p>
-
-        <div className="border-l-2 border-ink-900 pl-6 mb-12 max-w-prose">
-          <p className="text-lg sm:text-xl leading-relaxed text-ink-700">
-            Forty questions. Ten minutes. One useful answer: where is the highest-leverage place to start with your team?
-          </p>
+      <section className="container-reading pt-16 sm:pt-24 pb-16">
+        <div className="inline-block font-sans text-[13px] font-semibold text-ink-700 bg-ink-100 rounded-full px-3 py-1 mb-6">
+          The 4Ps diagnostic
         </div>
 
-        <Link to="/diagnostic" className="btn-primary text-base">
-          Start the diagnostic
-        </Link>
+        <h1 className="text-[2.6rem] sm:text-6xl leading-[1.05] tracking-[-0.035em] mb-5 max-w-[16ch]">
+          Where is your team strong? Where are the gaps?
+        </h1>
 
+        <p className="font-spoken text-xl sm:text-2xl text-ink-900 leading-snug mb-8 max-w-prose" style={{ fontVariationSettings: '"SOFT" 0, "WONK" 0' }}>
+          A quick health check of your team and your leadership priorities.
+        </p>
+
+        <p className="text-lg leading-relaxed text-ink-700 mb-8 max-w-prose">
+          Forty questions, ten minutes. Your free report scores all four Ps, names the first one to fix,
+          and gives you one concrete move to make this week.
+        </p>
+
+        <Link to="/diagnostic" className="btn-primary text-base">
+          Start the free diagnostic &rarr;
+        </Link>
         <p className="mt-4 font-sans text-sm text-ink-500">
-          Free. No account needed to begin.
+          Free. No card. No account needed to begin.
         </p>
       </section>
 
-      {/* What it measures */}
-      <section className="bg-ink-50 border-y border-ink-200 py-20">
+      {/* The four elements */}
+      <section className="bg-white border-y border-ink-200 py-16 sm:py-20">
         <div className="container-reading">
-          <div className="eyebrow mb-4">WHAT IT MEASURES</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 mb-10 max-w-prose leading-tight">
-            Four conditions every team has to hold to perform at its best.
+          <div className="eyebrow mb-3">What it measures</div>
+          <h2 className="text-3xl sm:text-4xl leading-tight mb-4">
+            Four elements.<br />Built in order.
           </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
-            <FourPCard
-              letter="P1"
-              name="Purpose"
-              colour="bg-purpose"
-              question="Where are we headed, and why does it matter?"
-              elements="Vision · Goals · Measures"
-            />
-            <FourPCard
-              letter="P2"
-              name="Plan"
-              colour="bg-plan"
-              question="How are we going to get there?"
-              elements="Process · Roles · Authority"
-            />
-            <FourPCard
-              letter="P3"
-              name="People"
-              colour="bg-people"
-              question="How are we going to organise our work?"
-              elements="Standards · Trust · Feedback"
-            />
-            <FourPCard
-              letter="P4"
-              name="Pride"
-              colour="bg-pride"
-              question="How do all of our people feel about the work?"
-              elements="Proactivity · Energy · Recognition"
-            />
-          </div>
-
-          <p className="max-w-prose text-lg leading-relaxed text-ink-600">
-            The diagnostic scores your team against twelve leadership drivers, three within each P. The report names the priority P, identifies the single move worth making this week, and gives you a sharp starting point for development.
+          <p className="text-lg leading-relaxed text-ink-700 mb-10 max-w-prose">
+            Every great team meets four requirements. They stack, one on the other. You build a brilliant
+            team from the foundation up, and every level adds to the team&rsquo;s confidence and capability.
           </p>
+
+          <ol className="flex flex-col gap-3">
+            {PS.map(p => <PRow key={p.name} p={p} />)}
+          </ol>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-4 border border-dashed border-ink-500 rounded-[10px] p-5 sm:pl-[4.75rem]">
+            <div className="max-w-prose">
+              <div className="font-semibold text-ink-900">Better meetings hold the four together</div>
+              <p className="text-[15px] leading-relaxed text-ink-700 mt-1">
+                Every goal, every delegation, every piece of feedback and every coaching conversation happens
+                in a meeting. Run your one-to-ones and team meetings well, and the four elements hold.
+              </p>
+            </div>
+            <ToolLink dot="bg-meeting" tool="Meeting Ignite" url="https://meeting.management-ignition.com" />
+          </div>
         </div>
+      </section>
+
+      {/* How it finds the starting point */}
+      <section className="container-reading py-16 sm:py-20">
+        <div className="eyebrow mb-3">How it finds your starting point</div>
+        <h2 className="text-3xl sm:text-4xl leading-tight mb-5 max-w-prose">
+          Most management problems start one level down.
+        </h2>
+        <p className="text-lg leading-relaxed text-ink-700 max-w-prose">
+          A People problem often comes from a weak Plan. A Plan problem usually comes from an unclear
+          Purpose. The diagnostic finds the lowest layer that isn&rsquo;t holding, because everything above
+          it rests on it.
+        </p>
       </section>
 
       {/* What you get */}
-      <section className="container-reading py-20">
-        <div className="eyebrow mb-4">WHAT YOU GET</div>
-        <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 mb-12 max-w-prose leading-tight">
-          A four-page report. One starting point. The work for next week.
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 max-w-reading">
-          <Feature
-            label="01"
-            title="A dashboard"
-            text="All four P scores, with band labels. You see at a glance which condition is strongest, which is weakest, and where the work is."
-          />
-          <Feature
-            label="02"
-            title="Your priority P"
-            text="The single most important P to work on, based on the framework's stack logic. Plain words. No jargon."
-          />
-          <Feature
-            label="03"
-            title="One move this week"
-            text="The highest-leverage development action drawn from the lowest-scoring driver. Specific. Doable in your real meetings."
-          />
-          <Feature
-            label="04"
-            title="The route to deeper work"
-            text="If you want the full report — twelve-driver breakdown, four-week plan, strengths, routing to coaching and the Ignite tools — the Pro report is one click away."
-          />
+      <section className="bg-white border-y border-ink-200 py-16 sm:py-20">
+        <div className="container-reading">
+          <div className="eyebrow mb-3">What you get</div>
+          <h2 className="text-3xl sm:text-4xl leading-tight mb-10 max-w-prose">
+            A four-page report you can act on this week.
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {GETS.map((g, i) => (
+              <div key={g.title} className="bg-ink-50 border border-ink-200 rounded-[10px] p-5">
+                <div className="font-sans text-2xl font-semibold text-accent leading-none mb-3">{i + 1}</div>
+                <h3 className="text-lg mb-2">{g.title}</h3>
+                <p className="text-[15px] leading-relaxed text-ink-700">{g.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Built by */}
-      <section className="border-t border-ink-200 bg-ink-50 py-20">
+      <section className="container-reading py-16 sm:py-20">
+        <div className="eyebrow mb-3">Built by</div>
+        <h2 className="text-2xl sm:text-3xl leading-snug mb-5 max-w-prose">
+          Jim Harvey, founder of The Message Business.
+        </h2>
+        <p className="text-lg leading-relaxed text-ink-700 mb-4 max-w-prose">
+          Thirty years of work with leaders and teams across banks, manufacturers, consultancies and
+          professional services firms. The 4Ps are the spine of his book <em>The Art of Managing</em> and
+          of the Management Ignition tools.
+        </p>
+        <p className="text-lg leading-relaxed text-ink-700 max-w-prose">
+          The diagnostic shows you where to start. The tools help you do the work. Both come from the same
+          model.
+        </p>
+      </section>
+
+      {/* Close */}
+      <section className="bg-ink-900 py-20 text-center">
         <div className="container-reading">
-          <div className="eyebrow mb-6">BUILT BY</div>
-          <h2 className="font-serif text-2xl sm:text-3xl text-ink-900 max-w-prose leading-snug mb-6">
-            Jim Harvey, founder of The Message Business.
-          </h2>
-          <p className="max-w-prose text-lg leading-relaxed text-ink-600 mb-4">
-            Thirty years of work with leaders and teams across banks, manufacturers, consultancies, and professional services firms. The 4Ps model is the spine of his book <em>The Art of Managing</em> and the Management Ignition tool suite.
-          </p>
-          <p className="max-w-prose text-lg leading-relaxed text-ink-600">
-            The diagnostic gives you the picture. The Management Ignition tools give you the working layer. The book gives you the readable version. All three trace back to the same model.
+          <h2 className="text-white text-3xl sm:text-4xl leading-tight mb-4">Find your starting point.</h2>
+          <p className="text-lg text-white/80 mb-8">Forty questions. Ten minutes. Free.</p>
+          <Link to="/diagnostic" className="inline-flex items-center justify-center min-h-[48px] px-6 font-sans font-semibold text-ink-900 bg-white rounded-[10px] hover:opacity-90">
+            Start the free diagnostic &rarr;
+          </Link>
+          <p className="mt-6 text-sm text-white/70">
+            Or go straight to the tools at <a href="https://app.management-ignition.com" className="text-white underline decoration-white/40 underline-offset-4">app.management-ignition.com</a>.
           </p>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="container-reading py-24 text-center">
-        <p className="font-serif italic text-xl sm:text-2xl text-ink-700 max-w-prose mx-auto mb-10 leading-snug">
-          One report. One starting point. Four weeks of focused work.
-        </p>
-        <Link to="/diagnostic" className="btn-primary text-base">
-          Start the diagnostic
-        </Link>
-        <p className="mt-4 font-sans text-sm text-ink-500">
-          Ten minutes. Free.
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-ink-200 py-10">
-        <div className="container-reading flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="font-sans text-xs text-ink-500">
-            © Jim Harvey / The Message Business 2026
-          </div>
-          <div className="font-sans text-xs text-ink-500 space-x-6">
-            <a href="https://themessagebusiness.com" className="hover:text-ink-900">themessagebusiness.com</a>
-            <a href="https://management-ignition.com" className="hover:text-ink-900">management-ignition.com</a>
+      <footer className="bg-ink-900 border-t border-white/10 py-8">
+        <div className="container-reading flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-white/60">
+          <div>&copy; Jim Harvey / The Message Business 2026</div>
+          <div className="flex gap-6">
+            <a href={SITE} className="hover:text-white">management-ignition.com</a>
+            <a href="https://themessagebusiness.com" className="hover:text-white">themessagebusiness.com</a>
           </div>
         </div>
       </footer>
@@ -166,33 +186,32 @@ export default function Landing() {
   );
 }
 
-function FourPCard({ letter, name, colour, question, elements }) {
+function PRow({ p }) {
   return (
-    <div className="bg-white border border-ink-200 p-6">
-      <div className="flex items-start gap-4 mb-4">
-        <div className={`${colour} text-white font-sans font-bold text-sm px-3 py-1.5 tracking-wider`}>
-          {letter}
+    <li className="grid grid-cols-[2.25rem_1fr] sm:grid-cols-[3rem_1fr_14rem] gap-x-4 sm:gap-x-6 gap-y-3 bg-ink-50 border border-ink-200 rounded-[10px] p-5">
+      <div className="text-2xl font-semibold text-accent leading-none">{p.n}</div>
+      <div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xl font-semibold text-ink-900 tracking-tight">{p.name}</span>
+          {p.tag && <span className="text-xs font-semibold text-ink-700 bg-ink-100 rounded-full px-2 py-0.5">{p.tag}</span>}
         </div>
-        <h3 className="font-serif text-2xl font-semibold text-ink-900 leading-tight">
-          {name}
-        </h3>
+        <div className="text-[15px] font-medium text-ink-900 mt-1">{p.question}</div>
+        <div className="text-sm text-ink-500 mt-1">{p.elements}</div>
       </div>
-      <p className="font-serif italic text-ink-700 text-lg mb-3 leading-snug">
-        {question}
-      </p>
-      <p className="font-sans text-xs text-ink-500 tracking-wider uppercase">
-        {elements}
-      </p>
-    </div>
+      <div className="col-start-2 sm:col-start-3 border-t sm:border-t-0 sm:border-l border-ink-200 pt-3 sm:pt-0 sm:pl-5">
+        <div className="text-[13px] font-semibold text-ink-500">The management work</div>
+        <div className="text-[15px] font-semibold text-ink-900 mt-0.5 mb-2 leading-snug">{p.work}</div>
+        <ToolLink dot={p.dot} tool={p.tool} url={p.url} />
+      </div>
+    </li>
   );
 }
 
-function Feature({ label, title, text }) {
+function ToolLink({ dot, tool, url }) {
   return (
-    <div>
-      <div className="font-sans text-xs text-ink-400 tracking-widest mb-2">{label}</div>
-      <h3 className="font-serif text-xl font-semibold text-ink-900 mb-3">{title}</h3>
-      <p className="text-base text-ink-600 leading-relaxed">{text}</p>
-    </div>
+    <a href={url} className="inline-flex items-center gap-2 text-[15px] font-semibold text-ink-900 underline decoration-ink-200 underline-offset-4 hover:decoration-ink-900">
+      <span className={`w-2 h-2 rounded-full ${dot}`} />
+      {tool} &rarr;
+    </a>
   );
 }

@@ -40,12 +40,12 @@ export default function Report() {
     <div className="min-h-screen bg-ink-50 text-ink-700">
       <header className="bg-white border-b border-ink-200 print:hidden">
         <div className="container-reading py-4 flex items-center justify-between">
-          <div className="font-sans text-xs tracking-widest text-ink-500 uppercase">
+          <div className="font-sans text-xs text-ink-500">
             Your Report · {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
           </div>
           <button
             onClick={() => window.print()}
-            className="font-sans text-xs tracking-widest text-ink-500 hover:text-ink-900 uppercase"
+            className="font-sans text-xs text-ink-500 hover:text-ink-900"
           >
             Print or save as PDF
           </button>
@@ -70,7 +70,7 @@ export default function Report() {
           <Link
             to="/"
             onClick={() => { setTimeout(reset, 100); }}
-            className="font-sans text-xs tracking-widest text-ink-500 hover:text-ink-900 uppercase"
+            className="font-sans text-xs text-ink-500 hover:text-ink-900"
           >
             ← Back to start
           </Link>
@@ -99,7 +99,7 @@ function ReportPage({ children }) {
 function CoverPage({ firstName, priorityP }) {
   return (
     <div className="text-center min-h-[28rem] flex flex-col justify-center">
-      <div className="eyebrow mb-6">YOUR 4Ps OF LEADERSHIP REPORT</div>
+      <div className="eyebrow mb-6">Your 4Ps report</div>
       <h1 className="font-serif font-semibold text-5xl sm:text-6xl text-ink-900 leading-[1.05] mb-6">
         The 4Ps of<br/>Leadership
       </h1>
@@ -108,7 +108,7 @@ function CoverPage({ firstName, priorityP }) {
       </p>
 
       <div className="border-t border-b border-ink-200 py-8 max-w-md mx-auto">
-        <div className="eyebrow text-ink-500 mb-3">YOUR PRIORITY</div>
+        <div className="eyebrow text-ink-500 mb-3">Your priority</div>
         <p
           className="font-serif font-semibold text-4xl"
           style={{ color: priorityP?.colour || '#1A1A1A' }}
@@ -123,7 +123,7 @@ function CoverPage({ firstName, priorityP }) {
       <p className="font-serif text-ink-600 mt-12">
         Prepared for <span className="font-semibold text-ink-900">{firstName || 'you'}</span>
       </p>
-      <p className="font-sans text-xs text-ink-500 tracking-widest uppercase mt-6">
+      <p className="font-sans text-xs text-ink-500 mt-6">
         Jim Harvey · The Message Business
       </p>
     </div>
@@ -136,7 +136,7 @@ function CoverPage({ firstName, priorityP }) {
 function DashboardPage({ scores }) {
   return (
     <div>
-      <div className="eyebrow mb-4">OPENING SUMMARY</div>
+      <div className="eyebrow mb-4">Opening summary</div>
       <h2 className="font-serif font-semibold text-3xl sm:text-4xl text-ink-900 leading-tight mb-6">
         Your team, at a glance.
       </h2>
@@ -184,7 +184,7 @@ function PBar({ p, score, band, isPriority }) {
           </div>
           <h3 className="font-serif text-2xl font-semibold text-ink-900">{p.name}</h3>
           {isPriority && (
-            <span className="font-sans text-xs tracking-widest uppercase text-ink-900 font-bold">
+            <span className="font-sans text-xs text-ink-900 font-bold">
               · Priority
             </span>
           )}
@@ -217,7 +217,7 @@ function PriorityPage({ priorityP, narrative, score, band }) {
   return (
     <div>
       <div className="eyebrow mb-4" style={{ color: priorityP.colour }}>
-        ● YOUR PRIORITY · {priorityP.code} · {priorityP.name.toUpperCase()}
+        ● Your priority · {priorityP.code} · {priorityP.name}
       </div>
       <h2 className="font-serif font-semibold text-3xl sm:text-4xl text-ink-900 leading-tight mb-3">
         {narrative.headline}
@@ -228,7 +228,7 @@ function PriorityPage({ priorityP, narrative, score, band }) {
 
       <div className="flex items-baseline gap-6 mb-10 pb-6 border-b border-ink-200">
         <div>
-          <div className="eyebrow text-ink-500 mb-1">YOUR SCORE</div>
+          <div className="eyebrow text-ink-500 mb-1">Your score</div>
           <div
             className="font-serif text-5xl font-semibold"
             style={{ color: priorityP.colour }}
@@ -259,7 +259,7 @@ function PriorityPage({ priorityP, narrative, score, band }) {
 function OneMovePage({ priorityP, driverEl, move, tool }) {
   return (
     <div>
-      <div className="eyebrow mb-4">ONE MOVE THIS WEEK</div>
+      <div className="eyebrow mb-4">One move this week</div>
       <h2 className="font-serif font-semibold text-3xl sm:text-4xl text-ink-900 leading-tight mb-3">
         Start here.
       </h2>
@@ -288,7 +288,7 @@ function OneMovePage({ priorityP, driverEl, move, tool }) {
       )}
 
       <div className="pt-8 border-t border-ink-200">
-        <div className="eyebrow mb-3">THE FULL PRO REPORT</div>
+        <div className="eyebrow mb-3">The full Pro report</div>
         <h3 className="font-serif font-semibold text-2xl sm:text-3xl text-ink-900 leading-tight mb-4">
           The complete picture, with the four-week plan.
         </h3>
@@ -311,7 +311,7 @@ function OneMovePage({ priorityP, driverEl, move, tool }) {
           className="btn-primary opacity-40 cursor-not-allowed"
           title="Coming soon"
         >
-          Get the Pro report — coming soon
+          Get the Pro report: coming soon
         </button>
         <p className="font-sans text-xs text-ink-500 mt-3 italic">
           Pro report ships in Phase 2. Watch your inbox for the launch.
