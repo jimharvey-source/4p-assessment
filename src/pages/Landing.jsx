@@ -218,7 +218,7 @@ function PRow({ p }) {
 
 function ToolLink({ dot, tool, url }) {
   return (
-    <a href={url} className="inline-flex items-center gap-2 text-[15px] font-semibold text-ink-900 underline decoration-ink-200 underline-offset-4 hover:decoration-ink-900">
+    <a href={url} className="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-[10px] bg-white border border-ink-200 text-[15px] font-semibold text-ink-900 no-underline hover:border-ink-900 transition-colors">
       <span className={`w-2 h-2 rounded-full ${dot}`} />
       {tool} &rarr;
     </a>
