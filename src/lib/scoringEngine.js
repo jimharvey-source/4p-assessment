@@ -83,17 +83,17 @@ export function scoreToBand(score) {
 // Spec rules (in order):
 //
 //   Rule 1 — FOUNDATION
-//     If any P scores below 40, the HIGHEST such P (highest in the
-//     stack: purpose > plan > people > pride) is the priority.
+//     If any P scores below 40, the one nearest the FOUNDATION
+//     (purpose, then plan, then people, then pride) is the priority.
 //
 //   Rule 2 — FIRST WEAK IN STACK
-//     Else if any P scores below 50, the HIGHEST such P is the priority.
+//     Else if any P scores below 50, the one nearest the foundation is the priority.
 //
 //   Rule 3 — LOWEST ABOVE 50
 //     Else the LOWEST-scoring P is the priority.
 //
 //   Rule 4 — TIES
-//     Within any rule, the higher P in the stack wins.
+//     Within any rule, the P nearer the foundation wins.
 //     (purpose > plan > people > pride)
 //
 // Returns { priority_p, priority_rule, priority_driver }
@@ -107,25 +107,25 @@ export function computePriority(pScores, elementScores) {
   // Rule 1 — foundation
   const foundationCandidates = ordered.filter(p => p.score !== null && p.score < 40);
   if (foundationCandidates.length > 0) {
-    const priority = foundationCandidates[0]; // highest in stack
+    const priority = foundationCandidates[0]; // nearest the foundation
     return finishPriority(priority.key, 'foundation', elementScores);
   }
 
   // Rule 2 — first weak in stack
   const weakCandidates = ordered.filter(p => p.score !== null && p.score < 50);
   if (weakCandidates.length > 0) {
-    const priority = weakCandidates[0]; // highest in stack
+    const priority = weakCandidates[0]; // nearest the foundation
     return finishPriority(priority.key, 'first_weak_in_stack', elementScores);
   }
 
   // Rule 3 — lowest above 50
-  // Among Ps with valid scores, find the lowest. Rule 4 tiebreak: higher in stack wins.
+  // Among Ps with valid scores, find the lowest. Rule 4 tiebreak: nearer the foundation wins.
   const valid = ordered.filter(p => p.score !== null);
   if (valid.length === 0) return { priority_p: null, priority_rule: null, priority_driver: null };
   let lowest = valid[0];
   for (const p of valid) {
     if (p.score < lowest.score) lowest = p;
-    // ties: stack order already favours the higher one (we iterate in stack order)
+    // ties: iterating from the foundation already favours the nearer one
   }
   return finishPriority(lowest.key, 'lowest_above_50', elementScores);
 }

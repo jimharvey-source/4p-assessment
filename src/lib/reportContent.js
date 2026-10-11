@@ -31,7 +31,7 @@ export const P_NARRATIVES = {
     bodyParas: [
       'A team with a clear Purpose can still fail to deliver if the Plan is wrong. The plan is the structure of the business: how the moving parts fit together, the hand-offs, the dependencies, the minimum standard operating procedures that let people work with safety and freedom of movement inside those boundaries.',
       'A weak score here means your team has the right intentions but the wrong scaffolding around them. The symptoms are familiar: things fall through the gaps, decisions bottleneck at your desk, new starters take six months to get useful rather than six weeks, and the team becomes brittle because the work depends on individuals rather than the system.',
-      'The leadership work that holds this P together is Delegation: the discipline of pushing authority and responsibility to the lowest possible level in the organisation. Done well, it turns the plan from a document into the actual flow of work.',
+      'The leadership work that holds this P together is Delegation: the discipline of pushing authority and responsibility to the lowest capable level in the organisation. Done well, it turns the plan from a document into the actual flow of work.',
     ],
   },
   people: {
@@ -45,7 +45,7 @@ export const P_NARRATIVES = {
   pride: {
     headline: 'Pride is where the work comes alive.',
     bodyParas: [
-      'Pride is downstream of the other three Ps. Without Purpose, there is nothing to take pride in. Without Plan, no clear vehicle through which to express care. Without People, no team to take pride in being part of.',
+      'Pride rests on the other three Ps. Without Purpose, there is nothing to take pride in. Without Plan, no clear vehicle through which to express care. Without People, no team to take pride in being part of.',
       'A weak score here means your team has the structural conditions in place but is operating without the internal state that turns competent execution into genuine ownership. The cost is sustained underperformance against capacity. The team appears competent but consistently does eighty per cent of what it could. Strong performers feel invisible. Care drains away.',
       'The leadership work that holds this P together is Coaching. Done well, it builds the judgement and ownership that turns a competent executor into someone who genuinely runs their patch as their own.',
     ],

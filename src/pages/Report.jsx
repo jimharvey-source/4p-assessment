@@ -141,7 +141,7 @@ function DashboardPage({ scores }) {
         Your team, at a glance.
       </h2>
       <p className="text-lg text-ink-600 leading-relaxed mb-10">
-        Your scores across the four conditions every team has to hold to perform at its best. The lowest P, after the framework's stack logic, is your priority.
+        Your scores across the four elements every team needs to perform at its best. Your priority is the first P, counting up from the foundation, that is not holding.
       </p>
 
       <div className="space-y-5">

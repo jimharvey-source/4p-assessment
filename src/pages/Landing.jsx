@@ -93,6 +93,15 @@ export default function Landing() {
             team from the foundation up, and every level adds to the team&rsquo;s confidence and capability.
           </p>
 
+          <figure className="mb-10 max-w-[600px] mx-auto">
+            <img
+              src="/4ps-levels-narrow.svg"
+              alt="The 4Ps as a pyramid: Purpose at the foundation, then Plan, People, and Pride at the peak. Each level governs everything above it. Each level can only influence the ones below it."
+              width="600" height="560" className="block w-full h-auto"
+            />
+            <figcaption className="text-center text-sm font-semibold text-ink-500 mt-3">Built from the bottom. Reinforced from the top.</figcaption>
+          </figure>
+
           <ol className="flex flex-col gap-3">
             {PS.map(p => <PRow key={p.name} p={p} />)}
           </ol>
