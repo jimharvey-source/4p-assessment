@@ -126,10 +126,10 @@ export default function Email() {
               />
               <div>
                 <p className="font-serif text-base text-ink-700 leading-relaxed">
-                  Add me to the Management Ignite mailing list.
+                  Add me to the Management Ignition mailing list.
                 </p>
                 <p className="font-sans text-xs text-ink-500 mt-2 leading-relaxed">
-                  Occasional notes from Jim Harvey on team leadership, the Management Ignite tools, and new diagnostic releases. Unsubscribe any time.
+                  Occasional notes from Jim Harvey on team leadership, the Management Ignition tools, and new diagnostic releases. Unsubscribe any time.
                 </p>
               </div>
             </label>

@@ -293,7 +293,7 @@ function OneMovePage({ priorityP, driverEl, move, tool }) {
           The complete picture, with the four-week plan.
         </h3>
         <p className="font-serif text-ink-600 leading-relaxed mb-6 max-w-prose">
-          The Pro report adds the full twelve-driver breakdown, the strengths to build on, a four-week development plan you can run alongside your normal work, and direct routing into the Management Ignite tool that addresses your priority.
+          The Pro report adds the full twelve-driver breakdown, the strengths to build on, a four-week development plan you can run alongside your normal work, and direct routing into the Management Ignition tool that addresses your priority.
         </p>
         <ul className="font-serif text-ink-600 leading-relaxed mb-8 space-y-2 max-w-prose">
           <li>· The full twelve-driver breakdown across all four Ps</li>

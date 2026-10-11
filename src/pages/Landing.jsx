@@ -13,7 +13,7 @@ export default function Landing() {
             href="https://management-ignition.com"
             className="font-sans text-xs uppercase tracking-widest text-ink-500 hover:text-ink-900 transition-colors"
           >
-            Management Ignite ↗
+            Management Ignition ↗
           </a>
         </div>
       </header>
@@ -32,7 +32,7 @@ export default function Landing() {
 
         <div className="border-l-2 border-ink-900 pl-6 mb-12 max-w-prose">
           <p className="text-lg sm:text-xl leading-relaxed text-ink-700">
-            Forty questions. Five minutes. One useful answer: where is the highest-leverage place to start with your team?
+            Forty questions. Ten minutes. One useful answer: where is the highest-leverage place to start with your team?
           </p>
         </div>
 
@@ -129,10 +129,10 @@ export default function Landing() {
             Jim Harvey, founder of The Message Business.
           </h2>
           <p className="max-w-prose text-lg leading-relaxed text-ink-600 mb-4">
-            Thirty years of work with leaders and teams across banks, manufacturers, consultancies, and professional services firms. The 4Ps model is the spine of his book <em>The Art of Managing</em> and the Management Ignite tool suite.
+            Thirty years of work with leaders and teams across banks, manufacturers, consultancies, and professional services firms. The 4Ps model is the spine of his book <em>The Art of Managing</em> and the Management Ignition tool suite.
           </p>
           <p className="max-w-prose text-lg leading-relaxed text-ink-600">
-            The diagnostic gives you the picture. The Management Ignite tools give you the working layer. The book gives you the readable version. All three trace back to the same model.
+            The diagnostic gives you the picture. The Management Ignition tools give you the working layer. The book gives you the readable version. All three trace back to the same model.
           </p>
         </div>
       </section>
@@ -146,7 +146,7 @@ export default function Landing() {
           Start the diagnostic
         </Link>
         <p className="mt-4 font-sans text-sm text-ink-500">
-          Five minutes. Free.
+          Ten minutes. Free.
         </p>
       </section>
 

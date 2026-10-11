@@ -112,8 +112,8 @@ export const DRIVER_MOVES = {
 // Used by the report's CTA section.
 
 export const TOOL_FOR_P = {
-  purpose: { name: 'Goals Ignite',     url: 'https://goalignite.themessagebusiness.com' },
-  plan:    { name: 'Delegate Ignite',  url: 'https://delegateignite.themessagebusiness.com' },
-  people:  { name: 'Feedback Ignite',  url: 'https://feedbackignite.themessagebusiness.com' },
-  pride:   { name: 'Coach Ignite',     url: 'https://coachignite.themessagebusiness.com' },
+  purpose: { name: 'Goal Ignite',      url: 'https://goal.management-ignition.com' },
+  plan:    { name: 'Delegate Ignite',  url: 'https://delegate.management-ignition.com' },
+  people:  { name: 'Feedback Ignite',  url: 'https://feedback.management-ignition.com' },
+  pride:   { name: 'Coach Ignite',     url: 'https://coach.management-ignition.com' },
 };
