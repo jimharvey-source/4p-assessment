@@ -5,7 +5,7 @@
 //   2. Dashboard     — all four P scores with bands
 //   3. Priority P    — plain-words narrative
 //   4. One Move      — the highest-leverage move for the priority driver
-//                       + CTA to the Pro report
+//                       + what the Pro report adds
 // =====================================================================
 
 import { useEffect, useState } from 'react';
@@ -298,7 +298,7 @@ function PriorityPage({ priorityP, narrative, score, band }) {
           </div>
         </div>
         <div>
-          <div className="eyebrow text-ink-500 mb-1">BAND</div>
+          <div className="eyebrow text-ink-500 mb-1">Band</div>
           <div className="font-serif italic text-2xl text-ink-700">{band}</div>
         </div>
       </div>
@@ -315,7 +315,7 @@ function PriorityPage({ priorityP, narrative, score, band }) {
 }
 
 // ---------------------------------------------------------------------
-// PAGE 4 — ONE MOVE + PRO REPORT CTA
+// PAGE 4 — ONE MOVE + THE PRO REPORT
 // ---------------------------------------------------------------------
 function OneMovePage({ priorityP, driverEl, move, tool }) {
   return (
@@ -333,7 +333,7 @@ function OneMovePage({ priorityP, driverEl, move, tool }) {
           className="border-l-4 pl-6 py-3 mb-8"
           style={{ borderColor: priorityP?.colour || '#1A1A1A' }}
         >
-          <div className="eyebrow text-ink-500 mb-2">DRIVER {driverEl.driverCode}</div>
+          <div className="eyebrow text-ink-500 mb-2">Driver {driverEl.driverCode}</div>
           <h3 className="font-serif text-2xl font-semibold text-ink-900">
             {driverEl.driverName}
           </h3>
@@ -349,34 +349,30 @@ function OneMovePage({ priorityP, driverEl, move, tool }) {
       )}
 
       <div className="pt-8 border-t border-ink-200">
-        <div className="eyebrow mb-3">The full Pro report</div>
+        <div className="eyebrow mb-3">The 4Ps Pro report</div>
         <h3 className="font-serif font-semibold text-2xl sm:text-3xl text-ink-900 leading-tight mb-4">
-          The complete picture, with the four-week plan.
+          Every statement, read for you.
         </h3>
         <p className="font-serif text-ink-600 leading-relaxed mb-6 max-w-prose">
-          The Pro report adds the full twelve-driver breakdown, the strengths to build on, a four-week development plan you can run alongside your normal work, and direct routing into the Management Ignition tool that addresses your priority.
+          This report gives you the headline. The Pro report goes statement by statement. It scores all 36 and tells you what each score means. For your priority it goes further: the three statements holding your team back, and what to do about each one.
         </p>
-        <ul className="font-serif text-ink-600 leading-relaxed mb-8 space-y-2 max-w-prose">
-          <li>· The full twelve-driver breakdown across all four Ps</li>
-          <li>· Two more development moves tailored to your priority P</li>
-          <li>· Your two strongest drivers and how to use them as anchors</li>
-          <li>· A four-week plan with weekly milestones</li>
-          {tool && (
-            <li>
-              · Routing into <span className="font-semibold">{tool.name}</span>, the working layer for your priority
-            </li>
-          )}
+        <ul className="font-serif text-ink-600 leading-relaxed mb-6 space-y-2 max-w-prose list-disc pl-5">
+          <li>A score and a one-line reading for each of the 36 statements</li>
+          <li>Your priority in depth: its three lowest statements, each with a principle and a move to make this week</li>
+          <li>Your three strongest statements, and how to build on them</li>
+          <li>The Management Ignition tool for each move{tool ? <>, starting with <span className="font-semibold">{tool.name}</span></> : null}</li>
+          <li>A PDF report, emailed to you and ready to download</li>
         </ul>
+        <p className="font-sans text-[15px] text-ink-700 mb-6 max-w-prose">
+          &pound;19.99. Free with a Management Ignition subscription or a programme code.
+        </p>
         <button
           disabled
           className="btn-primary opacity-40 cursor-not-allowed"
           title="Coming soon"
         >
-          Get the Pro report: coming soon
+          Pro report: coming soon
         </button>
-        <p className="font-sans text-xs text-ink-500 mt-3 italic">
-          Pro report ships in Phase 2. Watch your inbox for the launch.
-        </p>
       </div>
     </div>
   );
