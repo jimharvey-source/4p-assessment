@@ -9,6 +9,7 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDiagnostic } from '../lib/diagnosticState';
+import Footer from '../components/Footer';
 import { CONTEXT_QUESTIONS, PS, SCALE } from '../lib/questionBank';
 
 const TOTAL_STEPS = 5; // context + 4 Ps
@@ -89,6 +90,7 @@ export default function Diagnostic() {
           />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

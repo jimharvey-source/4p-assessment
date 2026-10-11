@@ -6,12 +6,14 @@
 //   1. Computes scores server-side
 //   2. Writes to Supabase via the service_role key
 //   3. Syncs to Mailchimp with tag 4p-diagnostic-free
-//   4. Returns scores for inline rendering
+//   4. Emails the report as a PDF with a link back
+//   5. Returns scores for inline rendering
 // =====================================================================
 
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDiagnostic } from '../lib/diagnosticState';
+import Footer from '../components/Footer';
 import { isComplete } from '../lib/scoringEngine';
 
 export default function Email() {
@@ -54,8 +56,8 @@ export default function Email() {
       }
 
       const data = await res.json();
-      setSubmitted(data.responseId, data.scores);
-      navigate('/report');
+      setSubmitted(data.responseId, data.scores, data.emailed);
+      navigate(`/report/${data.responseId}`);
     } catch (e) {
       console.error('[email] submission failed', e);
       setError('Something went wrong submitting your responses. Please try again in a moment.');
@@ -82,7 +84,7 @@ export default function Email() {
           Where shall we send it?
         </h1>
         <p className="text-lg text-ink-600 leading-relaxed max-w-prose mb-12">
-          Your four-page diagnostic report will appear on the next screen. Tell us where to send a copy so you can come back to it later.
+          Your four-page report appears on the next screen. We will email you a copy as a PDF, with a link back to it online.
         </p>
 
         <div className="max-w-prose space-y-8">
@@ -155,6 +157,7 @@ export default function Email() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 // The 4Ps diagnostic landing page, 11 October 2026.
 // Same wording and order as management-ignition.com: the four elements stack from Purpose,
@@ -175,15 +176,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="bg-ink-900 border-t border-white/10 py-8">
-        <div className="container-reading flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-white/60">
-          <div>&copy; Jim Harvey / The Message Business 2026</div>
-          <div className="flex gap-6">
-            <a href={SITE} className="hover:text-white">management-ignition.com</a>
-            <a href="https://themessagebusiness.com" className="hover:text-white">themessagebusiness.com</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

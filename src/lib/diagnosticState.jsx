@@ -24,6 +24,7 @@ const DEFAULT_STATE = {
   submitted: false,
   responseId: null,
   scores: null,     // populated after submission
+  emailed: null,    // true when /api/submit confirmed the email went
 };
 
 const Ctx = createContext(null);
@@ -55,7 +56,7 @@ export function DiagnosticProvider({ children }) {
   const setEmail = (email) => setState(s => ({ ...s, email }));
   const setFirstName = (first_name) => setState(s => ({ ...s, first_name }));
   const setConsent = (marketing_consent) => setState(s => ({ ...s, marketing_consent }));
-  const setSubmitted = (responseId, scores) => setState(s => ({ ...s, submitted: true, responseId, scores }));
+  const setSubmitted = (responseId, scores, emailed) => setState(s => ({ ...s, submitted: true, responseId, scores, emailed: emailed === true }));
 
   const reset = () => {
     setState(DEFAULT_STATE);

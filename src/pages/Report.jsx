@@ -8,26 +8,71 @@
 //                       + CTA to the Pro report
 // =====================================================================
 
-import { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDiagnostic } from '../lib/diagnosticState';
 import { PS } from '../lib/questionBank';
 import { scoreToBand } from '../lib/scoringEngine';
 import { P_NARRATIVES, DRIVER_MOVES, TOOL_FOR_P } from '../lib/reportContent';
+import Footer from '../components/Footer';
+
+function longDate(d) {
+  return new Date(d || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 
 export default function Report() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { state, reset } = useDiagnostic();
 
+  // Straight after the diagnostic the report is already in hand. From the
+  // emailed link, or on a refresh in a new tab, it is loaded by its id.
+  const fresh = state.submitted && state.scores && (!id || state.responseId === id);
+  const [loaded, setLoaded] = useState(null);   // { first_name, completed_at, scores }
+  const [loadError, setLoadError] = useState(null);
+
   useEffect(() => {
-    if (!state.submitted || !state.scores) {
-      navigate('/');
-    }
-  }, [state.submitted, state.scores, navigate]);
+    if (fresh) return;
+    if (!id) { navigate('/'); return; }
+    let cancelled = false;
+    fetch(`/api/report?id=${encodeURIComponent(id)}`)
+      .then(async r => {
+        if (!r.ok) throw new Error(r.status === 404 ? 'not_found' : `status_${r.status}`);
+        return r.json();
+      })
+      .then(d => { if (!cancelled) setLoaded(d); })
+      .catch(e => {
+        console.error('[report] load failed', e);
+        if (!cancelled) setLoadError(e.message === 'not_found' ? 'not_found' : 'error');
+      });
+    return () => { cancelled = true; };
+  }, [fresh, id, navigate]);
 
-  if (!state.scores) return null;
+  if (loadError) {
+    return (
+      <div className="min-h-screen flex flex-col bg-ink-50 text-ink-700">
+        <main className="flex-1 container-reading py-24">
+          <h1 className="text-3xl font-semibold text-ink-900 mb-4">
+            {loadError === 'not_found' ? 'We cannot find that report.' : 'We could not load your report just now.'}
+          </h1>
+          <p className="text-lg text-ink-600 mb-8">
+            {loadError === 'not_found'
+              ? 'Check the link in your email. If it still does not work, email team@management-ignition.com.'
+              : 'Reload the page to try again. If it still does not work, email team@management-ignition.com.'}
+          </p>
+          <Link to="/" className="btn-primary">Go to the diagnostic</Link>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-  const scores       = state.scores;
+  const scores    = fresh ? state.scores : loaded?.scores;
+  if (!scores) return null;
+  const firstName = fresh ? state.first_name : loaded?.first_name;
+  const reportId  = fresh ? state.responseId : id;
+  const dated     = fresh ? null : loaded?.completed_at;
+
   const priorityKey  = scores.priority_p;
   const priorityP    = PS.find(p => p.key === priorityKey);
   const narrative    = P_NARRATIVES[priorityKey];
@@ -35,26 +80,36 @@ export default function Report() {
   const driverEl     = priorityP?.elements.find(el => el.code === driverCode);
   const move         = DRIVER_MOVES[driverCode];
   const tool         = TOOL_FOR_P[priorityKey];
+  const pdfHref      = reportId ? `/api/report?id=${encodeURIComponent(reportId)}&format=pdf` : null;
 
   return (
     <div className="min-h-screen bg-ink-50 text-ink-700">
       <header className="bg-white border-b border-ink-200 print:hidden">
-        <div className="container-reading py-4 flex items-center justify-between">
-          <div className="font-sans text-xs text-ink-500">
-            Your Report · {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+        <div className="container-reading py-3 flex items-center justify-between gap-4">
+          <div className="font-sans text-sm text-ink-500">
+            Your report &middot; {longDate(dated)}
           </div>
-          <button
-            onClick={() => window.print()}
-            className="font-sans text-xs text-ink-500 hover:text-ink-900"
-          >
-            Print or save as PDF
-          </button>
+          {pdfHref && (
+            <a href={pdfHref} className="inline-flex items-center min-h-[40px] px-4 rounded-[10px] bg-accent text-[15px] font-semibold text-white no-underline hover:opacity-90 transition-opacity">
+              Download PDF
+            </a>
+          )}
         </div>
       </header>
 
+      {fresh && (
+        <div className="container-reading pt-8 print:hidden">
+          <div className={`rounded-[12px] border px-5 py-4 text-[15px] leading-relaxed ${state.emailed ? 'bg-accent-soft border-accent/20 text-ink-900' : 'bg-white border-ink-200 text-ink-700'}`}>
+            {state.emailed
+              ? <>A copy is on its way to <strong>{state.email}</strong>, with the PDF attached and a link back to this page.</>
+              : <>We could not email your copy just now. Download the PDF above, or bookmark this page: it stays at this address.</>}
+          </div>
+        </div>
+      )}
+
       <main className="py-10 sm:py-16">
         <ReportPage>
-          <CoverPage firstName={state.first_name} priorityP={priorityP} />
+          <CoverPage firstName={firstName} priorityP={priorityP} />
         </ReportPage>
         <ReportPage>
           <DashboardPage scores={scores} />
@@ -66,17 +121,23 @@ export default function Report() {
           <OneMovePage priorityP={priorityP} driverEl={driverEl} move={move} tool={tool} />
         </ReportPage>
 
-        <div className="text-center mt-8 mb-4 print:hidden">
+        <div className="text-center mt-8 mb-4 print:hidden flex flex-col items-center gap-5">
+          {pdfHref && (
+            <a href={pdfHref} className="inline-flex items-center min-h-[44px] px-5 rounded-[10px] bg-accent text-base font-semibold text-white no-underline hover:opacity-90 transition-opacity">
+              Download your report as a PDF
+            </a>
+          )}
           <Link
             to="/"
             onClick={() => { setTimeout(reset, 100); }}
-            className="font-sans text-xs text-ink-500 hover:text-ink-900"
+            className="font-sans text-sm text-ink-500 hover:text-ink-900"
           >
-            ← Back to start
+            &larr; Back to start
           </Link>
         </div>
       </main>
 
+      <Footer />
       <PrintStyles />
     </div>
   );

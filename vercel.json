@@ -2,7 +2,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "functions": {
+    "api/report.js": { "includeFiles": "api/_fonts/**" },
+    "api/submit.js": { "includeFiles": "api/_fonts/**" }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/((?!api/).*)", "destination": "/" }
   ]
 }

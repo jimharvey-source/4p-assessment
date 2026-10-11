@@ -16,6 +16,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { scoreResponses, isComplete, toSupabasePayload } from '../src/lib/scoringEngine.js';
 import { INSTRUMENT_VERSION, FRAMEWORK_VERSION } from '../src/lib/questionBank.js';
+import { sendReportEmail } from './_lib/sendReport.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -108,9 +109,29 @@ export default async function handler(req, res) {
       }
     }
 
+    // Email the copy the page promises. A failed send does not block the
+    // report, but the page is told, so it never claims a copy is on its way.
+    const mail = await sendReportEmail({
+      to: row.email,
+      firstName: row.first_name,
+      scores,
+      id: responseId,
+      date: row.completed_at,
+    });
+    if (mail.sent) {
+      const { error: upErr } = await supabase
+        .from('four_ps_responses')
+        .update({ report_emailed_at: new Date().toISOString() })
+        .eq('id', responseId);
+      if (upErr) console.error('[submit] could not record report_emailed_at', upErr);
+    } else {
+      console.error('[submit] report email not sent:', mail.reason);
+    }
+
     return res.status(200).json({
       responseId,
       scores,
+      emailed: mail.sent,
     });
 
   } catch (err) {

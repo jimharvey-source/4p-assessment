@@ -13,6 +13,7 @@ export default function App() {
         <Route path="/diagnostic" element={<Diagnostic />} />
         <Route path="/email" element={<Email />} />
         <Route path="/report" element={<Report />} />
+        <Route path="/report/:id" element={<Report />} />
       </Routes>
     </DiagnosticProvider>
   );
