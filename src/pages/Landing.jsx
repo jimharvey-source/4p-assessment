@@ -93,14 +93,6 @@ export default function Landing() {
             team from the foundation up, and every level adds to the team&rsquo;s confidence and capability.
           </p>
 
-          <figure className="mb-10 max-w-[600px] mx-auto">
-            <img
-              src="/4ps-levels-narrow.svg"
-              alt="The 4Ps as a pyramid: Purpose at the foundation, then Plan, People, and Pride at the peak. Each level governs everything above it. Each level can only influence the ones below it."
-              width="600" height="560" className="block w-full h-auto"
-            />
-            <figcaption className="text-center text-sm font-semibold text-ink-500 mt-3">Built from the bottom. Reinforced from the top.</figcaption>
-          </figure>
 
           <ol className="flex flex-col gap-3">
             {PS.map(p => <PRow key={p.name} p={p} />)}
@@ -116,6 +108,7 @@ export default function Landing() {
             </div>
             <ToolLink dot="bg-meeting" tool="Meeting Ignite" url="https://meeting.management-ignition.com" />
           </div>
+          <Levels />
         </div>
       </section>
 
@@ -218,9 +211,49 @@ function PRow({ p }) {
 
 function ToolLink({ dot, tool, url }) {
   return (
-    <a href={url} className="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-[10px] bg-white border border-ink-200 text-[15px] font-semibold text-ink-900 no-underline hover:border-ink-900 transition-colors">
-      <span className={`w-2 h-2 rounded-full ${dot}`} />
+    <a href={url} className="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-[10px] bg-accent text-[15px] font-semibold text-white no-underline hover:opacity-90 transition-opacity">
       {tool} &rarr;
     </a>
+  );
+}
+
+function Levels() {
+  const points = [
+    { icon: 'up', title: 'The foundation governs everything above it.', text: 'Each level sets the limits for the ones above. Plan can be no clearer than Purpose, and People can be no stronger than the Plan they work to.' },
+    { icon: 'down', title: 'Higher levels can only influence the ones below.', text: 'A proud team tightens its own standards and process. It cannot fix a purpose nobody has set.' },
+    { icon: 'look', title: 'Symptoms show at the peak. Causes sit in the foundation.', text: 'A team with no energy looks like a Pride problem. The cause usually sits further down: an unclear standard, unclear authority, or no agreed purpose at all. So start with the lowest layer that is not holding.' },
+  ];
+  return (
+    <figure className="lv" aria-label="The 4Ps as a pyramid: Purpose at the foundation, then Plan, People, and Pride at the peak.">
+      <figcaption>
+        <span className="eyebrow">How the four work together</span>
+        <h3 className="text-2xl sm:text-[1.75rem] leading-tight tracking-[-0.025em] mt-1 mb-8">Built from the bottom. Reinforced from the top.</h3>
+      </figcaption>
+      <div className="lv-body">
+        <div className="lv-stack" aria-hidden="true">
+          <span className="lv-rail up" />
+          <div className="lv-bar peak" style={{ width: '46%' }}>Pride <small>Peak</small></div>
+          <div className="lv-bar" style={{ width: '64%' }}>People</div>
+          <div className="lv-bar" style={{ width: '82%' }}>Plan</div>
+          <div className="lv-bar" style={{ width: '100%' }}>Purpose <small>Foundation</small></div>
+          <span className="lv-rail down" />
+        </div>
+        <ul className="flex flex-col gap-6">
+          {points.map(p => (
+            <li key={p.title} className="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
+              <span className={`lv-icon ${p.icon === 'down' ? 'down' : ''}`}>
+                {p.icon === 'up' && <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1b2a4a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 13V3M4 7l4-4 4 4" /></svg>}
+                {p.icon === 'down' && <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#0e7c7b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3v10M4 9l4 4 4-4" /></svg>}
+                {p.icon === 'look' && <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1b2a4a" strokeWidth="1.8" strokeLinecap="round"><circle cx="7" cy="7" r="4.5" /><path d="M10.5 10.5 14 14" /></svg>}
+              </span>
+              <div>
+                <strong className="block text-base font-semibold text-ink-900 mb-1">{p.title}</strong>
+                <p className="text-[15px] leading-relaxed text-ink-700">{p.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </figure>
   );
 }
