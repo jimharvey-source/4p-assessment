@@ -26,7 +26,7 @@ export default function Report() {
   const { state, reset } = useDiagnostic();
 
   // Straight after the diagnostic the report is already in hand. From the
-  // emailed link, or on a refresh in a new tab, it is loaded by its id.
+  // saved link, or on a refresh in a new tab, it is loaded by its id.
   const fresh = state.submitted && state.scores && (!id || state.responseId === id);
   const [loaded, setLoaded] = useState(null);   // { first_name, completed_at, scores }
   const [loadError, setLoadError] = useState(null);
@@ -99,10 +99,8 @@ export default function Report() {
 
       {fresh && (
         <div className="container-reading pt-8 print:hidden">
-          <div className={`rounded-[12px] border px-5 py-4 text-[15px] leading-relaxed ${state.emailed ? 'bg-accent-soft border-accent/20 text-ink-900' : 'bg-white border-ink-200 text-ink-700'}`}>
-            {state.emailed
-              ? <>A copy is on its way to <strong>{state.email}</strong>, with the PDF attached and a link back to this page.</>
-              : <>We could not email your copy just now. Download the PDF above, or bookmark this page: it stays at this address.</>}
+          <div className="rounded-[12px] border border-ink-200 bg-white px-5 py-4 text-[15px] leading-relaxed text-ink-700">
+            Download your report as a PDF, or bookmark this page. Your report stays at this address.
           </div>
         </div>
       )}

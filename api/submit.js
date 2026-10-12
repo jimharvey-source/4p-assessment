@@ -16,7 +16,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { scoreResponses, isComplete, toSupabasePayload } from '../src/lib/scoringEngine.js';
 import { INSTRUMENT_VERSION, FRAMEWORK_VERSION } from '../src/lib/questionBank.js';
-import { sendReportEmail } from './_lib/sendReport.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -52,8 +51,12 @@ export default async function handler(req, res) {
     } = body;
 
     // Validate
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      return res.status(400).json({ error: 'Valid email required' });
+    const cleanEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    if (cleanEmail && !/\S+@\S+\.\S+/.test(cleanEmail)) {
+      return res.status(400).json({ error: 'Email not valid' });
+    }
+    if (marketing_consent && !cleanEmail) {
+      return res.status(400).json({ error: 'Email required to join the mailing list' });
     }
     if (!first_name || typeof first_name !== 'string' || first_name.trim().length < 1) {
       return res.status(400).json({ error: 'First name required' });
@@ -73,9 +76,9 @@ export default async function handler(req, res) {
       pressure:          context.pressure   || null,
       team_type:         context.team_type  || null,
       answers,
-      email:             email.trim().toLowerCase(),
+      email:             cleanEmail || null,
       first_name:        first_name.trim(),
-      marketing_consent: Boolean(marketing_consent),
+      marketing_consent: Boolean(marketing_consent && cleanEmail),
       completed_at:      new Date().toISOString(),
       instrument_version: INSTRUMENT_VERSION,
       framework_version:  FRAMEWORK_VERSION,
@@ -97,7 +100,7 @@ export default async function handler(req, res) {
 
     // Sync to Mailchimp if consent given. Fire-and-log.
     // A Mailchimp failure should NOT block the report from rendering.
-    if (marketing_consent) {
+    if (row.marketing_consent) {
       try {
         await syncToMailchimp({ email: row.email, first_name: row.first_name });
         await supabase
@@ -109,29 +112,9 @@ export default async function handler(req, res) {
       }
     }
 
-    // Email the copy the page promises. A failed send does not block the
-    // report, but the page is told, so it never claims a copy is on its way.
-    const mail = await sendReportEmail({
-      to: row.email,
-      firstName: row.first_name,
-      scores,
-      id: responseId,
-      date: row.completed_at,
-    });
-    if (mail.sent) {
-      const { error: upErr } = await supabase
-        .from('four_ps_responses')
-        .update({ report_emailed_at: new Date().toISOString() })
-        .eq('id', responseId);
-      if (upErr) console.error('[submit] could not record report_emailed_at', upErr);
-    } else {
-      console.error('[submit] report email not sent:', mail.reason);
-    }
-
     return res.status(200).json({
       responseId,
       scores,
-      emailed: mail.sent,
     });
 
   } catch (err) {
